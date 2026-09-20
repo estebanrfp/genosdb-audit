@@ -1,5 +1,7 @@
 # GenosDB Audit
 
+![GenosDB Audit: Zero Trust evidence review and official CDN provenance checks](assets/cover.png)
+
 GenosDB-specific tools for reviewing Zero Trust audit receipts and recording the provenance of the official CDN release.
 
 **Public preview, v0.1.0.** This repository publishes the defensive, command-line portion of a local audit project. It does not include the interactive protocol test runner, packet injection, vulnerability reproductions, raw audit records, or GenosDB binaries. It does not run a Zero Trust security campaign or prove that GenosDB is impenetrable.
