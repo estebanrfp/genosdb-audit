@@ -1,0 +1,28 @@
+{
+  "$schema": "../auditor/app-target.schema.json",
+  "schemaVersion": 1,
+  "id": "synthetic-genosdb-example",
+  "name": "Synthetic reviewer fixture (not a GenosDB audit)",
+  "authorization": {
+    "mode": "loopback-only",
+    "owner": "Fixture maintainer",
+    "purpose": "Offline verification of manifest and receipt review",
+    "targetRoot": ".",
+    "harnessRoot": ".",
+    "readOnlyTarget": true
+  },
+  "runtime": {
+    "entryUrl": "http://127.0.0.1:4173/",
+    "allowedOrigins": ["http://127.0.0.1:4173"],
+    "relayUrls": []
+  },
+  "genosdb": {
+    "version": "synthetic-fixture",
+    "receiverModel": "honest",
+    "attackerModel": "self-key-and-arbitrary-packets"
+  },
+  "adapter": { "id": "synthetic-adapter", "module": "fixture.mjs" },
+  "capabilities": ["signed-operations"],
+  "artifacts": [{ "name": "synthetic-artifact", "path": "fixture.mjs" }],
+  "execution": { "minObservationMs": 500 }
+}

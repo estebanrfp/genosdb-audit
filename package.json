@@ -1,0 +1,20 @@
+{
+  "name": "genosdb-audit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "GenosDB Zero Trust evidence review and official CDN provenance checks",
+  "license": "MIT",
+  "author": "Esteban Fuster Pozzi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/estebanrfp/genosdb-audit.git"
+  },
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node auditor/self-test.mjs && node --test tests/*.test.mjs",
+    "audit:validate": "node auditor/cli.mjs validate examples/target.json",
+    "audit:plan": "node auditor/cli.mjs plan examples/target.json",
+    "cdn:verify": "node scripts/check-cdn.mjs"
+  }
+}

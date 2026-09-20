@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genosdb.local/schemas/app-target-v1.json",
+  "title": "GenosDB Zero Trust audit target",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "authorization",
+    "runtime",
+    "genosdb",
+    "adapter",
+    "capabilities",
+    "artifacts",
+    "execution"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,79}$" },
+    "name": { "type": "string", "minLength": 3 },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "owner", "purpose", "targetRoot", "harnessRoot", "readOnlyTarget"],
+      "properties": {
+        "mode": { "const": "loopback-only" },
+        "owner": { "type": "string", "minLength": 3 },
+        "purpose": { "type": "string", "minLength": 12 },
+        "targetRoot": { "type": "string", "minLength": 1 },
+        "harnessRoot": { "type": "string", "minLength": 1 },
+        "readOnlyTarget": { "const": true },
+        "expiresAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entryUrl", "allowedOrigins", "relayUrls"],
+      "properties": {
+        "entryUrl": { "type": "string", "format": "uri" },
+        "allowedOrigins": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "format": "uri" } },
+        "relayUrls": { "type": "array", "uniqueItems": true, "items": { "type": "string", "format": "uri" } }
+      }
+    },
+    "genosdb": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "receiverModel", "attackerModel"],
+      "properties": {
+        "version": { "type": "string", "minLength": 1 },
+        "receiverModel": { "const": "honest" },
+        "attackerModel": { "const": "self-key-and-arbitrary-packets" }
+      }
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["module"],
+      "properties": {
+        "id": { "type": "string" },
+        "module": { "type": "string", "minLength": 1 }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "signed-operations",
+          "roles",
+          "acl",
+          "encrypted-records",
+          "replay",
+          "reordering",
+          "partitions",
+          "restart",
+          "multi-peer",
+          "persistence",
+          "origin-isolation",
+          "resource-bounds",
+          "governance",
+          "transport-direct",
+          "transport-delta",
+          "transport-compressed-delta",
+          "transport-full-state"
+        ]
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "path"],
+        "properties": {
+          "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,79}$" },
+          "path": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minObservationMs"],
+      "properties": {
+        "minObservationMs": { "type": "integer", "minimum": 250, "maximum": 120000 }
+      }
+    }
+  }
+}
