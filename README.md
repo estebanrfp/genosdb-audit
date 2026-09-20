@@ -58,6 +58,8 @@ See [RELEASE-STATUS.md](RELEASE-STATUS.md) for the validation boundary and unres
 
 ## Contributing
 
+Pull requests are welcome from anyone. This repository is where the audit of the published bundle grows: new passive checks against the official CDN release, stronger receipt validation, new obligations in the Zero Trust catalog, offline tests that pin them. Everything here is MIT and independent of the engine, so a contribution never depends on access to its source.
+
 Keep contributions scoped to GenosDB evidence quality, passive provenance checks and reviewer reliability. Add offline synthetic tests for behavior changes. Do not include credentials, mnemonics, user data, absolute local paths, vulnerability payloads or raw audit records in commits or issues. See [SECURITY.md](SECURITY.md).
 
 ## License
